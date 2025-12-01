@@ -1,0 +1,9 @@
+[submodule "vendored/bgfx.cmake"]
+	path = vendored/bgfx.cmake
+	url = https://github.com/bkaradzic/bgfx.cmake.git
+[submodule "vendored/SDL"]
+	path = vendored/SDL
+	url = https://github.com/libsdl-org/SDL.git
+[submodule "vendored/glimmerite"]
+	path = vendored/glimmerite
+	url = https://github.com/HasangerGames/glimmerite.git
