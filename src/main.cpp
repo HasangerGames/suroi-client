@@ -2,6 +2,7 @@
 
 #include "gmi/Application.h"
 #include "gmi/Container.h"
+#include "gmi/Graphics.h"
 #include "gmi/Sprite.h"
 
 using namespace gmi;
@@ -15,17 +16,44 @@ Application* gmiMain() {
     SDL_Cursor* cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_CROSSHAIR);
     SDL_SetCursor(cursor);
 
-    auto* player = app->stage().createChild<Container>(math::Transform{{400, 300}});
-
     app->texture().loadSpritesheet("../assets/normal-cf5a29b4@1x.json");
     app->texture().loadSpritesheet("../assets/normal-c6581886@1x.json");
+    app->sound().load("swing", "../assets/swing.mp3");
+
+    auto* graphics = app->stage().createChild<Graphics>();
+    graphics
+        ->fillPoly({
+            {30, 40},
+            {120, 20},
+            {250, 60},
+            {290, 150},
+            {260, 250},
+            {180, 290},
+            {90, 270},
+            {20, 200},
+            {40, 120}
+        }, {1.0f, 0.0f, 1.0f, 0.0f})
+        .fillPoly({
+            {410, 420},
+            {470, 405},
+            {540, 430},
+            {580, 490},
+            {595, 560},
+            {570, 610},
+            {510, 645},
+            {445, 630},
+            {415, 580},
+            {405, 520}
+        }, {1.0f, 1.0f, 0.0f, 0.0f})
+        .fillRect({300, 100, 100, 100}, {1.0f, 0.0f, 0.0f})
+        .fillRect({500, 100, 100, 100}, {1.0f, 1.0f, 0.0f});
+
+    auto* player = app->stage().createChild<Container>(math::Transform({400, 300}));
 
     player->createChild<Sprite>("hasanger_base");
 
     auto* leftFist = player->createChild<Sprite>("hasanger_fist", math::Transform({38, -35}));
     auto* rightFist = player->createChild<Sprite>("hasanger_fist", math::Transform{{38, 35}});
-
-    app->sound().load("swing", "../assets/swing.mp3");
 
     app->addEventListener(SDL_EVENT_MOUSE_MOTION, [app, player](const SDL_Event& event) {
         const auto [w, h] = app->getSize();

@@ -16,12 +16,6 @@ target_link_libraries(glimmerite PRIVATE
     bx
     bimg_decode
     glaze::glaze
+    earcut_hpp
 )
-target_link_libraries(suroi_client PRIVATE
-    SDL3::SDL3
-    bgfx
-    bx
-    bimg_decode
-    glaze::glaze
-    glimmerite
-)
+target_link_libraries(suroi_client PRIVATE glimmerite)
